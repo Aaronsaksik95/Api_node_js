@@ -25,7 +25,7 @@ exports.create = (req, res) => {
 
 }
 exports.read = (req, res) => {
-    Product.find({})
+    Product.find()
     .then((data) => {
         res.send({
             product: data,
