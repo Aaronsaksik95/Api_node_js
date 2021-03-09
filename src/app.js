@@ -3,3 +3,6 @@ const db = require('./services/mongoose.service');
 
 app.start();
 db.connectDb();
+
+// heroku login   
+// heroku logs --tail 
