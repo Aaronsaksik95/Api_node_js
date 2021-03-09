@@ -2,9 +2,9 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
-exports.create = async (req, res) => {
+exports.create = (req, res) => {
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const hashedPassword = bcrypt.hash(req.body.password, 10)
         const user = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
     
 }
 
-exports.login = async (req, res) => {
+exports.login = (req, res) => {
     console.log(req.body)
     User.findOne({
         email: req.body.email,
