@@ -9,68 +9,68 @@ exports.create = (req, res) => {
     });
 
     order.save()
-    .then((data) => {
-        User.findByIdAndUpdate(
-            req.body.user,
-            {
-                orders: data._id
-            })
-            .then((data) => {
-                res.send({
-                    data: data
+        .then((data) => {
+            User.findByIdAndUpdate(
+                req.body.user,
+                {
+                    orders: data._id
                 })
-            })
-            .catch((err) => {
-                res.status(500).send({
-                    error: 500,
-                    message: err.message
+                .then((data) => {
+                    res.send({
+                        data: data
+                    })
                 })
-            })
-        
-    })
-    .catch((err) => {
-        console.log(err.message);    
-        res.status(500).send({
-            error: 500,
-            message: err.message || "some error occured while creating order"
+                .catch((err) => {
+                    res.status(500).send({
+                        error: 500,
+                        message: err.message
+                    })
+                })
+
         })
-    })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "some error occured while creating order"
+            })
+        })
 
 }
 exports.read = (req, res) => {
     Order.find({})
-    .populate('products')
-    .populate('user')
-    .then((data) => {
-        res.send({
-            order: data,
-            response: true
+        .populate('products')
+        .populate('user')
+        .then((data) => {
+            res.send({
+                order: data,
+                response: true
+            })
         })
-    })
-    .catch((err) => {
-        console.log(err.message);    
-        res.status(500).send({
-            error: 500,
-            message: err.message || "some error occured while creating order"
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "some error occured while creating order"
+            })
         })
-    })
 
 }
 
 exports.readOne = (req, res) => {
     Order.findById(req.params.id)
-    .then((data) => {
-        res.send({
-            order: data,
-            response: true
+        .then((data) => {
+            res.send({
+                order: data,
+                response: true
+            })
         })
-    })
-    .catch((err) => {
-        console.log(err.message);    
-        res.status(500).send({
-            error: 500,
-            message: err.message || "NULL"
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
         })
-    })
 
 }

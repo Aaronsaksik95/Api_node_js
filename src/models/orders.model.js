@@ -5,13 +5,13 @@ const ordersSchema = new Schema({
     total: {
         type: Number
     },
-    user: { 
-        type: Schema.Types.ObjectId, 
-        ref: 'User' 
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
-    products: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'Produit' 
+    products: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Produit'
     }]
 })
 

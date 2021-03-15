@@ -24,9 +24,33 @@ const userSchema = new Schema({
         maxlength: 60,
         unique: true
     },
-    orders: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: 'Order' 
+    phone: {
+        type: String
+    },
+    isAdmin: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    postalCode: {
+        type: Number,
+        required: true
+    },
+    country: {
+        type: String,
+        required: true
+    },
+    orders: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
     }]
 })
 

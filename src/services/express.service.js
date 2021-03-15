@@ -7,7 +7,7 @@ const apiRouter = require('../routes');
 const bodyParser = require('body-parser');
 
 exports.start = () => {
-    
+
     const port = process.env.PORT;
     app.use(bodyParser.json());
     app.use('/api/v1', apiRouter);

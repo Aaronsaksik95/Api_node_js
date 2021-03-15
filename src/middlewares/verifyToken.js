@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken')
 
-function verifyToken(req, res, next){
+function verifyToken(req, res, next) {
     const token = req.headers.authorization;
-    if(!token){
+    if (!token) {
         return res.status(401).send({
             auth: false,
             token: null,
@@ -10,7 +10,7 @@ function verifyToken(req, res, next){
         })
     }
     jwt.verify(token, process.env.SECRET_JWT, (err, decoded) => {
-        if(err){
+        if (err) {
             return res.status(401).send({
                 auth: false,
                 token: null,

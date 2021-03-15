@@ -4,19 +4,23 @@ const jwt = require('jsonwebtoken')
 
 exports.create = (req, res) => {
 
-    const hashedPassword = bcrypt.hash(req.body.password, 10)
-        const user = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hashedPassword
-        });
-        user.save()
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10)
+    const user = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: hashedPassword,
+        phone: req.body.phone,
+        address: req.body.address,
+        city: req.body.city,
+        postalCode: req.body.postalCode,
+        country: req.body.country
+    });
+    user.save()
         .then((data) => {
             let userToken = jwt.sign({
                 id: data._id,
                 name: data.firstName
-    
             },
                 process.env.SECRET_JWT,
                 {
@@ -29,14 +33,12 @@ exports.create = (req, res) => {
             })
         })
         .catch((err) => {
-            console.log(err.message);    
-            res.status(500).send({
+            console.log(err.message);
+            return res.status(500).send({
                 error: 500,
                 message: err.message || "some error occured while creating user"
             })
         })
-
-    
 }
 
 exports.login = (req, res) => {
@@ -44,59 +46,59 @@ exports.login = (req, res) => {
     User.findOne({
         email: req.body.email,
     })
-    .then((data) => {
-        if(bcrypt.compareSync(req.body.password, data.password)){
-            let userToken = jwt.sign({
-                id: data._id,
-                name: data.name
-            },
-                process.env.SECRET_JWT,
-                {
-                    expiresIn: 86400
-                }
-            )
-            res.send({
-                token: userToken,
-                auth: true
-            })
-        } else {
+        .then((data) => {
+            if (bcrypt.compareSync(req.body.password, data.password)) {
+                let userToken = jwt.sign({
+                    id: data._id,
+                    name: data.name
+                },
+                    process.env.SECRET_JWT,
+                    {
+                        expiresIn: 86400
+                    }
+                )
+                res.send({
+                    token: userToken,
+                    auth: true
+                })
+            } else {
+                res.status(500).send({
+                    error: 500,
+                    message: "Password is incorrect"
+                })
+            }
+        })
+        .catch((err) => {
+            console.log(err.message);
             res.status(500).send({
                 error: 500,
-                message: "Password is incorrect"
+                message: "Email is incorrect"
             })
-        }
-    })
-    .catch((err) => {
-        console.log(err.message);    
-        res.status(500).send({
-            error: 500,
-            message: "Email is incorrect"
         })
-    })
 
 }
 
 exports.readOne = (req, res) => {
-    
+
     User.findById(req.params.id)
-    .populate('orders')
-    .then((data) => {
-        res.send({
-            user: data,
-            response: true
+        .populate('orders')
+        .then((data) => {
+            res.send({
+                user: data,
+                response: true
+            })
         })
-    })
-    .catch((err) => {
-        console.log(err.message);    
-        res.status(500).send({
-            error: 500,
-            message: err.message || "NULL"
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
         })
-    })
 }
 function getOne(id) {
     return User.findById(id)
-    .populate('orders')
+        .populate('orders')
 }
 
 exports.update = (req, res) => {
@@ -106,16 +108,28 @@ exports.update = (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            orders: req.body.orders
+            phone: req.body.phone,
+            address: req.body.address,
+            city: req.body.city,
+            postalCode: req.body.postalCode,
+            country: req.body.country
         }
-        )
-    .then(() => {
-        getOne(req.params.id)
-        .then((data) => {
-            res.send({
-                update: true,
-                newUser: data
-            })
+    )
+        .then(() => {
+            getOne(req.params.id)
+                .then((data) => {
+                    res.send({
+
+                        user: data,
+                        update: true,
+                    })
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        error: 500,
+                        message: err.message || "NULL"
+                    })
+                })
         })
         .catch((err) => {
             res.status(500).send({
@@ -123,12 +137,4 @@ exports.update = (req, res) => {
                 message: err.message || "NULL"
             })
         })
-    })
-    .catch((err) => {
-        res.status(500).send({
-            error: 500,
-            message: err.message || "NULL"
-        })
-    })
 }
-        
