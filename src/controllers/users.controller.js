@@ -107,7 +107,6 @@ exports.update = (req, res) => {
         {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            email: req.body.email,
             phone: req.body.phone,
             address: req.body.address,
             city: req.body.city,
