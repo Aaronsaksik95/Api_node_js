@@ -13,7 +13,7 @@ exports.create = (req, res) => {
             User.findByIdAndUpdate(
                 req.body.user,
                 {
-                    orders: data._id
+                    $push: { orders: data._id }
                 })
                 .then((data) => {
                     res.send({
@@ -40,7 +40,6 @@ exports.create = (req, res) => {
 exports.read = (req, res) => {
     Order.find({})
         .populate('products')
-        .populate('user')
         .then((data) => {
             res.send({
                 order: data,
@@ -59,6 +58,7 @@ exports.read = (req, res) => {
 
 exports.readOne = (req, res) => {
     Order.findById(req.params.id)
+        .populate('products')
         .then((data) => {
             res.send({
                 order: data,

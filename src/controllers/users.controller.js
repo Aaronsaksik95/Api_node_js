@@ -20,7 +20,7 @@ exports.create = (req, res) => {
         .then((data) => {
             let userToken = jwt.sign({
                 id: data._id,
-                name: data.firstName
+                isAdmin: data.isAdmin
             },
                 process.env.SECRET_JWT,
                 {
@@ -50,7 +50,7 @@ exports.login = (req, res) => {
             if (bcrypt.compareSync(req.body.password, data.password)) {
                 let userToken = jwt.sign({
                     id: data._id,
-                    name: data.name
+                    isAdmin: data.isAdmin
                 },
                     process.env.SECRET_JWT,
                     {
