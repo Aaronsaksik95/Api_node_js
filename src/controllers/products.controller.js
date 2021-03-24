@@ -27,6 +27,7 @@ exports.create = (req, res) => {
 }
 exports.read = (req, res) => {
     Product.find()
+        .populate('categories')
         .then((data) => {
             res.send({
                 products: data,
@@ -45,6 +46,7 @@ exports.read = (req, res) => {
 
 exports.readOne = (req, res) => {
     Product.findById(req.params.id)
+        .populate('categories')
         .then((data) => {
             res.send({
                 product: data,
@@ -63,7 +65,7 @@ exports.readOne = (req, res) => {
 
 function getOne(id) {
     return Product.findById(id)
-    .populate('categories')
+        .populate('categories')
 }
 
 exports.update = (req, res) => {
@@ -98,4 +100,21 @@ exports.update = (req, res) => {
                 message: err.message || "NULL"
             })
         })
+}
+
+exports.delete = (req, res) => {
+    Product.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.send({
+                delete: true
+            })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
+        })
+
 }

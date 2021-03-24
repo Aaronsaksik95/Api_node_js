@@ -96,6 +96,26 @@ exports.readOne = (req, res) => {
             })
         })
 }
+
+exports.read = (req, res) => {
+
+    User.find()
+        .populate('orders')
+        .then((data) => {
+            res.send({
+                users: data,
+                response: true
+            })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
+        })
+}
+
 function getOne(id) {
     return User.findById(id)
         .populate('orders')
