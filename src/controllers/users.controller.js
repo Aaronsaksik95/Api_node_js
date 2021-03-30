@@ -156,3 +156,20 @@ exports.update = (req, res) => {
             })
         })
 }
+
+exports.delete = (req, res) => {
+    User.findByIdAndDelete(req.params.id)
+        .then(() => {
+            res.send({
+                delete: true
+            })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
+        })
+
+}

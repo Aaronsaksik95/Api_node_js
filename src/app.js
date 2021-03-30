@@ -13,3 +13,4 @@ db.connectDb();
 // Regler       de variable d'env coté front
 // Limiter les routes fronts pour les users
 // Gerer les erreurs (si le produit a le même titre...)
+// Ajouter Commandes en bdd sans oublier stripe

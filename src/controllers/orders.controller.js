@@ -40,9 +40,10 @@ exports.create = (req, res) => {
 exports.read = (req, res) => {
     Order.find({})
         .populate('products')
+        .populate('user')
         .then((data) => {
             res.send({
-                order: data,
+                orders: data,
                 response: true
             })
         })

@@ -40,7 +40,7 @@ exports.read = (req, res) => {
 }
 
 exports.readOne = (req, res) => {
-    Category.findById(req.params.id)
+    Category.findOne({ title: req.params.title })
         .then((data) => {
             res.send({
                 category: data,
@@ -48,9 +48,9 @@ exports.readOne = (req, res) => {
             })
         })
         .catch((err) => {
-            console.log(err.message);
             res.status(500).send({
                 error: 500,
+                response: false,
                 message: err.message || "NULL"
             })
         })
@@ -68,10 +68,10 @@ exports.update = (req, res) => {
             update: true
         })
     })
-    .catch((err) => {
-        res.status(500).send({
-            error: 500,
-            message: err.message || "NULL"
+        .catch((err) => {
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
         })
-    })
 }
