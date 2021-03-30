@@ -1,5 +1,6 @@
 const config = require('../configs/stripe.config');
 const stripe = require('stripe')(config.stripe.key)
+require("regenerator-runtime/runtime");
 
 exports.checkout = async (req, res) => {
   const session = await stripe.checkout.sessions.create({
