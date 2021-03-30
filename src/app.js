@@ -1,5 +1,6 @@
 const app = require('./services/express.service');
 const db = require('./services/mongoose.service');
+require("regenerator-runtime/runtime");
 
 app.start();
 db.connectDb();
