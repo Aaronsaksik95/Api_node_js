@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 
 }
 exports.read = (req, res) => {
-    Order.find({})
+    Order.find()
         .populate('products')
         .populate('user')
         .then((data) => {
@@ -65,6 +65,34 @@ exports.readOne = (req, res) => {
                 order: data,
                 response: true
             })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
+        })
+}
+exports.delete = (req, res) => {
+    Order.findByIdAndDelete(req.params.id)
+        .then((data) => {
+            User.findByIdAndUpdate(
+                req.body.user,
+                {
+                    $pull: { orders: data._id }
+                })
+                .then(() => {
+                    res.send({
+                        delete: true
+                    })
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        error: 500,
+                        message: err.message
+                    })
+                })
         })
         .catch((err) => {
             console.log(err.message);

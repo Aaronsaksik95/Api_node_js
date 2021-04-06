@@ -9,8 +9,5 @@ db.connectDb();
 
 // RESTE A FAIRE: 
 // Users.validation joi
-// Regler le pb de async dans heroku coté API
 // Regler       de variable d'env coté front
-// Limiter les routes fronts pour les users
 // Gerer les erreurs (si le produit a le même titre...)
-// Ajouter Commandes en bdd sans oublier stripe

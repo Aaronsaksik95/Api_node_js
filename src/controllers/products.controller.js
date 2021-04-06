@@ -4,6 +4,7 @@ exports.create = (req, res) => {
     const product = new Product({
         price: req.body.price,
         title: req.body.title,
+        genre: req.body.genre,
         description: req.body.description,
         image: req.body.image,
         categories: req.body.categories
@@ -60,8 +61,44 @@ exports.readOne = (req, res) => {
                 message: err.message || "NULL"
             })
         })
-
 }
+
+exports.readWithGenre = (req, res) => {
+    Product.find({ genre: req.params.genre })
+        .populate('categories')
+        .then((data) => {
+            res.send({
+                products: data,
+                response: true
+            })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "some error occured while creating product"
+            })
+        })
+}
+
+exports.readWithCategory = (req, res) => {
+    Product.find({ categories: { title: "man"} })
+        .populate('categories')
+        .then((data) => {
+            res.send({
+                products: data,
+                response: true
+            })
+        })
+        .catch((err) => {
+            console.log(err.message);
+            res.status(500).send({
+                error: 500,
+                message: err.message || "some error occured while creating product"
+            })
+        })
+}
+
 
 function getOne(id) {
     return Product.findById(id)
@@ -74,6 +111,7 @@ exports.update = (req, res) => {
         {
             price: req.body.price,
             title: req.body.title,
+            genre: req.body.genre,
             description: req.body.description,
             image: req.body.image,
             categories: req.body.categories

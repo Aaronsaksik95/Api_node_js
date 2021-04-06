@@ -130,7 +130,8 @@ exports.update = (req, res) => {
             address: req.body.address,
             city: req.body.city,
             postalCode: req.body.postalCode,
-            country: req.body.country
+            country: req.body.country,
+            isAdmin: req.body.isAdmin
         }
     )
         .then(() => {

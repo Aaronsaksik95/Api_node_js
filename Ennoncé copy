@@ -1,0 +1,111 @@
+ÉVALUATION 
+
+Construire un shop de produits ou service (au choix). 
+
+ 
+
+doit inclure :  
+
+ 
+
+- Une API 
+
+- Une base de données MongoDb 
+
+- Un front Eshop pour les utilisateurs 
+
+- Un back office pour les utilisateurs admin 
+
+ 
+
+• Le eshop doit permettre aux utilisateurs :  
+
+
+- De créer une wishlist (liste des produits que l’utilisateur aime bien) // localstorage 
+
+- Pas de choix de mode de livraison (seulement une livraison classique au tarif que vous voulez) 
+
+- Les produits appartiennent à des catégories. 
+
+- Il est possible de rechercher un produit grâce à un simple formulaire de recherche (recherche sur titre et description) 
+
+ 
+
+Le back office permet aux utilisateurs admin (back office) : 
+
+ 
+
+- Changer statut des commandes(livré, en cours, terminés) 
+
+- Créer des utilisateurs admin 
+
+ 
+
+Modèle produits:  
+
+ 
+
+- Titre 
+
+- Description 
+
+- Prix ht 
+
+- Catégories 
+
+ 
+
+Modèle Utilisateurs 
+
+ 
+
+- Nom 
+
+- Prénom 
+
+- Téléphone 
+
+- Mail 
+
+- IsAdmin / rôle 
+
+- Adresse (cp, adresse, ville, pays) 
+
+ 
+
+Modèle Commande 
+
+ 
+
+- montant total 
+
+- produits 
+
+- utilisateur 
+
+ 
+
+Catégories 
+
+ 
+
+- titre 
+
+ 
+
+ 
+
+RENDU: 
+
+ 
+
+- Un repo pour front (dans le readme, inclure nom et prénom de l’élève + lien vers le site) 
+
+- Un repo pour back (dans le readme, inclure nom et prénom de l’élève + lien vers le site) 
+
+- Les deux environnement doivent être mis en ligne sur un serveur (type heroku) 
+
+ 
+
+- Date de rendu le 12 avril  
+
