@@ -18,8 +18,8 @@ exports.checkout = async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:8080/success',
-    cancel_url: 'http://localhost:8080/cancel',
+    success_url: `${config.stripe.vue_url}success`,
+    cancel_url: `${config.stripe.vue_url}cancel`,
   });
 
   res.json({ id: session.id });

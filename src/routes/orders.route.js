@@ -7,6 +7,7 @@ const verifyTokenAdmin = require('../middlewares/verifyTokenAdmin');
 router.post('/orders', order.create);
 router.get('/orders', verifyTokenAdmin, order.read);
 router.get('/orders/:id', order.readOne);
+router.put('/orders/:id', verifyTokenAdmin, order.update);
 router.delete('/orders/:id', verifyTokenAdmin, order.delete);
 
 

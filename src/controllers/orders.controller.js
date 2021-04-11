@@ -74,6 +74,28 @@ exports.readOne = (req, res) => {
             })
         })
 }
+
+exports.update = (req, res) => {
+    Order.findByIdAndUpdate(req.params.id,
+        {
+            status: req.body.status
+        }
+    )
+        .then((data) => {
+            res.send({
+                order: data,
+                update: true
+            })
+        })
+        .catch((err) => {
+            res.status(500).send({
+                error: 500,
+                message: err.message || "NULL"
+            })
+        })
+
+}
+
 exports.delete = (req, res) => {
     Order.findByIdAndDelete(req.params.id)
         .then((data) => {
@@ -101,5 +123,4 @@ exports.delete = (req, res) => {
                 message: err.message || "NULL"
             })
         })
-
 }

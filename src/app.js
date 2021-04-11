@@ -8,6 +8,16 @@ db.connectDb();
 // heroku logs --tail --app api-node-aaron-saksik
 
 // RESTE A FAIRE: 
+// Style:
+//      footer
+//      Vous aimeriez aussi
+//      Mailjet
+//      bouton
+//      caroussel
+// Categorie
+//      array categorie dans produit
+//      filtre categori
+// router link
+// Ajouter + image
 // Users.validation joi
-// Regler       de variable d'env coté front
 // Gerer les erreurs (si le produit a le même titre...)
