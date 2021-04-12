@@ -5,7 +5,7 @@ const ordersSchema = new Schema({
     status: {
         type: String,
         require: true,
-        default: "to deliver"
+        default: "TO DELIVER"
     },
     total: {
         type: Number

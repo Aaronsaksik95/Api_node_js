@@ -7,6 +7,7 @@ exports.create = (req, res) => {
         genre: req.body.genre,
         description: req.body.description,
         image: req.body.image,
+        categoriesArray: req.body.categoriesArray,
         categories: req.body.categories
     });
 
@@ -82,7 +83,7 @@ exports.readWithGenre = (req, res) => {
 }
 
 exports.readWithCategory = (req, res) => {
-    Product.find({ categories: { title: "man"} })
+    Product.find({ categoriesArray: req.params.category, genre: req.params.genre})
         .populate('categories')
         .then((data) => {
             res.send({
@@ -114,6 +115,7 @@ exports.update = (req, res) => {
             genre: req.body.genre,
             description: req.body.description,
             image: req.body.image,
+            categoriesArray: req.body.categoriesArray,
             categories: req.body.categories
         }
     )

@@ -22,6 +22,9 @@ const productSchema = new Schema({
     image: {
         type: String
     },
+    categoriesArray: [{
+        type: String
+    }],
     categories: [{
         type: Schema.Types.ObjectId,
         ref: 'Category'
